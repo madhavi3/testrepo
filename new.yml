@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  vars:
+     tomcat_version: 9.0.34
+  tasks:
+  - name: download below package if its ubuntu and tomcat version 8.5.54
+    get_url:
+       url: https://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.54/bin/apache-tomcat-8.5.54.tar.gz
+       dest: /home/ansible/tomcat_binaries/
+    when: ansible_distribution == "Ubuntu" and tomcat_version == "8.5.54"
+  - name: download below package if its ubuntu and tomcat version 9.0.34
+    get_url:
+       url: http://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.34/bin/apache-tomcat-9.0.34.tar.gz
+       dest: /home/ansible/tomcat_binaries/
+    when: ansible_distribution == "Ubuntu" and tomcat_version == "9.0.34"
